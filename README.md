@@ -115,3 +115,5 @@ npm run dev
 - **Frontend:** React 18, Vite 5, React Router v6, Axios, Tailwind CSS (CDN)
 - **Backend:** Node.js, Express, MongoDB + Mongoose, JWT, bcryptjs
 - **AI:** Google Gemini API (`gemini-pro`)
+
+*Built By - Sanchay Kumar Singh*
