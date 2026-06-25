@@ -116,4 +116,5 @@ npm run dev
 - **Backend:** Node.js, Express, MongoDB + Mongoose, JWT, bcryptjs
 - **AI:** Google Gemini API (`gemini-pro`)
 
-*Built By - Sanchay Kumar Singh*
+
+*✅Built By - Sanchay Kumar Singh*
