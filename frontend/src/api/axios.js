@@ -5,20 +5,19 @@ const API = axios.create({
 });
 
 
-API.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
+API.interceptors.request.use((config) => {
 
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+  const token = localStorage.getItem("token");
 
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+  console.log("Sending token:", token);
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
-);
+
+  return config;
+
+});
 
 
 export default API;
