@@ -6,7 +6,9 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const app = express();
-
+app.use("/",(req,res)=>{
+  res.end("server is live!")
+})
 // Middleware
 app.use(cors());
 app.use(express.json());
