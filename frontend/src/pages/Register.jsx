@@ -1,38 +1,69 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import API from '../api/axios.js'
 import { useAuth } from '../context/AuthContext.jsx'
 
-const inputCls = 'w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm outline-none focus:border-indigo-500 transition bg-white'
+const inputCls =
+  'w-full border border-gray-200 rounded-lg px-4 to py-2.5 text-sm outline-none focus:border-indigo-500 transition bg-white'
 
 const Register = () => {
   const { login } = useAuth()
   const navigate = useNavigate()
-  const [form, setForm] = useState({ name: '', email: '', password: '' })
+
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    password: ''
+  })
+
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
     setLoading(true)
     setError('')
+
     try {
-      const res = await axios.post('/api/auth/register', form)
-      login(res.data.token, res.data.user)
+      const res = await API.post('/api/auth/register', form)
+
+      login(
+        res.data.token,
+        res.data.user
+      )
+
       navigate('/dashboard')
+
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed')
+      setError(
+        err.response?.data?.message || 'Registration failed'
+      )
+    } finally {
       setLoading(false)
     }
   }
 
+
   return (
     <div className="flex justify-center items-start py-16 px-4 min-h-[70vh]">
       <div className="bg-white border border-gray-200 rounded-2xl shadow-md p-8 w-full max-w-md">
-        <h2 className="text-2xl font-extrabold text-gray-900 mb-1">Create Account</h2>
-        <p className="text-gray-400 text-sm mb-6">Join AI Blog and start writing</p>
+
+        <h2 className="text-2xl font-extrabold text-gray-900 mb-1">
+          Create Account
+        </h2>
+
+        <p className="text-gray-400 text-sm mb-6">
+          Join AI Blog and start writing
+        </p>
+
 
         {error && (
           <p className="bg-red-50 text-red-600 border border-red-200 rounded-lg px-4 py-3 text-sm mb-5">
@@ -40,9 +71,14 @@ const Register = () => {
           </p>
         )}
 
+
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5">Full Name</label>
+            <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+              Full Name
+            </label>
+
             <input
               type="text"
               name="name"
@@ -53,8 +89,13 @@ const Register = () => {
               className={inputCls}
             />
           </div>
+
+
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email</label>
+            <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+              Email
+            </label>
+
             <input
               type="email"
               name="email"
@@ -65,8 +106,13 @@ const Register = () => {
               className={inputCls}
             />
           </div>
+
+
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5">Password</label>
+            <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+              Password
+            </label>
+
             <input
               type="password"
               name="password"
@@ -78,21 +124,35 @@ const Register = () => {
               className={inputCls}
             />
           </div>
+
+
           <button
             type="submit"
             disabled={loading}
             className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 disabled:opacity-50 transition mt-1"
           >
-            {loading ? 'Creating account...' : 'Sign Up'}
+            {
+              loading
+              ? 'Creating account...'
+              : 'Sign Up'
+            }
           </button>
+
         </form>
+
 
         <p className="text-center mt-5 text-sm text-gray-400">
           Already have an account?{' '}
-          <Link to="/login" className="text-indigo-600 font-semibold hover:underline">
+
+          <Link
+            to="/login"
+            className="text-indigo-600 font-semibold hover:underline"
+          >
             Login
           </Link>
+
         </p>
+
       </div>
     </div>
   )
