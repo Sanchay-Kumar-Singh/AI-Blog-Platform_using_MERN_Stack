@@ -9,7 +9,6 @@ A full-stack blog platform where you can write blogs manually or generate them w
 - Category filter + Pagination
 - Dashboard for your own blogs
 - Fully Responsive (Mobile + Desktop)
-
 ---
 
 ## Project Structure
